@@ -33,8 +33,7 @@ void main(List<String> arguments) async {
     }
   }
 
-  final cspellWords = await getCspellWords();
-  final diff = normalize(names).toSet().difference(cspellWords.toSet());
+  final diff = normalize(names).toSet();
 
   writer.writeAll(diff.toList(), "\n");
 }
