@@ -5,7 +5,11 @@
       "name": "dart_cspell_cli",
       "request": "launch",
       "type": "dart",
-      "args": ["**/*.dart", "**.dart", "-o", "cspell.txt"]
+      "args": [
+        "../flutter_cspell/flutter/packages/flutter/lib/**.dart",
+        "-o",
+        "output.txt"
+      ]
     }
   ]
 }

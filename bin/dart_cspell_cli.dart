@@ -8,14 +8,17 @@ import 'package:glob/glob.dart';
 import 'package:glob/list_local_fs.dart';
 import 'package:path/path.dart' as path;
 
-void main(List<String> arguments) {
+void main(List<String> arguments) async {
   final parser = ArgParser();
   parser.addOption('output', abbr: 'o');
   final results = parser.parse(arguments);
   final output = results["output"];
   final writer = output != null ? File(output).openWrite() : stdout;
 
-  final dartFile = results.rest.expand((e) => Glob(e).listSync()).toList();
+  // https://github.com/dart-lang/glob/issues/81
+  final dartFile = results.rest
+      .expand((e) => Glob(e, caseSensitive: true).listSync())
+      .toList();
 
   final names = <String>[];
 
@@ -30,6 +33,8 @@ void main(List<String> arguments) {
     }
   }
 
-  final res = normalize(names).toSet().toList();
-  writer.writeAll(res, "\n");
+  final cspellWords = await getCspellWords();
+  final diff = normalize(names).toSet().difference(cspellWords.toSet());
+
+  writer.writeAll(diff.toList(), "\n");
 }
