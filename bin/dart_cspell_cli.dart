@@ -28,6 +28,7 @@ void main(List<String> arguments) async {
       final result = parseFile(
         path: file,
         featureSet: FeatureSet.latestLanguageVersion(),
+        throwIfDiagnostics: false,
       );
       names.addAll(extractTopLevelNames(result.unit.childEntities));
     }
