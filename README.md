@@ -1,4 +1,6 @@
-# Dart_CSpell_Cli
+# dart_cspell_cli
+
+Github Action: https://github.com/fa0311/flutter_cspell
 
 ```ps1
 dart run bin/dart_cspell_cli.dart flutter_cspell/flutter/packages/*/lib/**.dart -o output1.txt
