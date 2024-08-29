@@ -91,19 +91,24 @@ Iterable<String> splitWords(String name) {
   for (final c in name.split("")) {
     if (["_", "-", " "].contains(c)) {
       result.add([]);
+    } else if (List.generate(10, (i) => i.toString()).contains(c)) {
+      result.add([]);
     } else if (c.toUpperCase() == c) {
-      result.add([c.toLowerCase()]);
+      if (result.last.every((e) => e.toUpperCase() == e)) {
+        result.last.add(c);
+      } else {
+        result.add([c]);
+      }
     } else {
       result.last.add(c);
     }
   }
-  return result.map((e) => e.join(""));
+  return result.map((e) => e.map((e) => e.toLowerCase()).join());
 }
 
 List<String> normalize(List<String> names) {
   return names
       .where((e) => !e.startsWith("_"))
-      .map((e) => e.replaceAll(RegExp(r"\d"), ""))
       .expand((e) => splitWords(e))
       .where((e) => e.length > 3)
       .toList();

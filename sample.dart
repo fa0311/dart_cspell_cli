@@ -60,3 +60,11 @@ extension Uuuuuu on String {
     print("_zzzzzzz");
   }
 }
+
+@Deprecated("zzzzzz")
+void xxxxxx(String? zzzzzz, {@Deprecated("zzzzzz") String? yyyyyy}) {
+  print(zzzzzz);
+}
+
+final aaaaaaaaBbbbbbbb = "zzzzzz";
+final ccccccccDDDDDDDD = "zzzzzz";
